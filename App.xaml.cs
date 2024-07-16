@@ -9,7 +9,7 @@ namespace Jobs_Planner
     /// </summary>
     public partial class App : Application
     {
-        private SplashScreen _splashScreen;
+        
 
         protected override void OnStartup(StartupEventArgs e)
         {
