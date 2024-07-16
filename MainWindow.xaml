@@ -12,8 +12,14 @@
     <DockPanel>
 
         <Menu x:Name="menu">
-            <MenuItem Header="Failas" />
-            <MenuItem Header="Įrankiai" />
+            <MenuItem Header="Failas">
+                <MenuItem Click="Shutdown_Click" Header="Išjungti" />
+            </MenuItem>
+
+            <MenuItem Header="Įrankiai">
+                <MenuItem Click="Configuration_Click" Header="Konfiguracija" />
+
+            </MenuItem>
         </Menu>
 
 

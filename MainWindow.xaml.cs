@@ -23,5 +23,13 @@ namespace Jobs_Planner
             DateTextBlock.Text ="Šiandienos diena: " + DateTime.Now.ToString("yyyy-MM-dd");
 
         }
+        private void Shutdown_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+        private void Configuration_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
     }
 }
