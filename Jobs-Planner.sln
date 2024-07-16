@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobs-Planner", "Jobs-Planner.csproj", "{C01B31F8-FB77-4763-8F28-A970C1B4E8B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C01B31F8-FB77-4763-8F28-A970C1B4E8B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C01B31F8-FB77-4763-8F28-A970C1B4E8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C01B31F8-FB77-4763-8F28-A970C1B4E8B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C01B31F8-FB77-4763-8F28-A970C1B4E8B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92CDD194-96A3-4010-BDC1-19BD14A1F40A}
+	EndGlobalSection
+EndGlobal
