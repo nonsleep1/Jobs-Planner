@@ -19,6 +19,9 @@ namespace Jobs_Planner
         public MainWindow()
         {
             InitializeComponent();
+
+            DateTextBlock.Text ="Šiandienos diena: " + DateTime.Now.ToString("yyyy-MM-dd");
+
         }
     }
 }
