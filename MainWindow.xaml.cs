@@ -25,7 +25,9 @@ namespace Jobs_Planner
         }
         private void Shutdown_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Application.Current.Shutdown();
+
+            //Close();
         }
         private void Configuration_Click(object sender, RoutedEventArgs e)
         {

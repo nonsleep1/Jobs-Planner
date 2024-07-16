@@ -9,6 +9,30 @@ namespace Jobs_Planner
     /// </summary>
     public partial class App : Application
     {
+        private SplashScreen _splashScreen;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            // Show the splash screen
+           
+
+            // Load the main window asynchronously
+            Task.Run(() =>
+            {
+                // Simulate some work (e.g., loading resources)
+                System.Threading.Thread.Sleep(3000);
+
+                // Load the main window
+                this.Dispatcher.Invoke(() =>
+                {
+                    var mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    
+                });
+            });
+        }
     }
 
 }
