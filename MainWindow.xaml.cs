@@ -60,7 +60,7 @@ namespace Jobs_Planner
         {
             if(_databaseService != null)
             {
-                var workilistwindow = new Jobs_Planner.Windows.Tools.WorkersList(_databaseService);
+                var workilistwindow = new WorkersList(_databaseService);
                 workilistwindow.Show();
             }
             else

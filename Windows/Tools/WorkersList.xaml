@@ -31,14 +31,9 @@
                     IsReadOnly="True" />
                 <DataGridTextColumn Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Header="Vardas" />
                 <DataGridTextColumn Binding="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Header="Pavardė" />
-
+                <DataGridCheckBoxColumn Header="Deleted" Binding="{Binding IsDeleted}" Width="*"/>
             </DataGrid.Columns>
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Click="AddEntry_Click" Header="Pridėti įrašą" />
-                    <MenuItem Click="MarkAsDeleted_Click" Header="Ištrinti įrašą" />
-                </ContextMenu>
-            </DataGrid.ContextMenu>
+            
         </DataGrid>
         <Button
             Width="75"
