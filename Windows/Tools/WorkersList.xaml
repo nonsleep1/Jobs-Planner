@@ -18,6 +18,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             AutoGenerateColumns="False"
+            EnableRowVirtualization="True"
             CanUserAddRows="True"
             CanUserDeleteRows="True"
             ItemsSource="{Binding Workers_List}"
