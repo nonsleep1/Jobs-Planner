@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Jobs_Planner.Database;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +21,11 @@ namespace Jobs_Planner.Windows.Tools
     /// </summary>
     public partial class Configuration : Window
     {
-        public Configuration()
+        private readonly DatabaseService _databaseService;
+
+        public ObservableCollection<Workers> Workers_List { get; set; }
+
+        public Configuration(DatabaseService databaseService)
         {
             InitializeComponent();
         }

@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Jobs_Planner.Windows.Tools
 {
@@ -53,22 +54,54 @@ namespace Jobs_Planner.Windows.Tools
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var worker = e.Row.Item as Workers;
-                if (worker != null)
+                Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    using (var connection = _databaseService.GetConnection())
+
+                    var worker = e.Row.Item as Workers;
+                    if (worker != null)
                     {
-                        if (worker.Id == 0) // New Worker
+                        using (var connection = _databaseService.GetConnection())
                         {
-                            connection.Insert(worker);
+                            if (worker.Id == 0) // New Worker
+                            {
+                                connection.Insert(worker);
+                                worker.Id = connection.ExecuteScalar<int>("SELECT last_insert_rowid()");
+                            }
+                            else // Existing person
+                            {
+                                connection.Update(worker);
+                            }
                         }
-                        else // Existing person
+                        //LoadWorkers();
+
+
+                        //LoadWorkers();
+                        // Ensure the newly added or edited item is selected and visible
+                        dataGrid.CommitEdit(DataGridEditingUnit.Row, true);
+                        dataGrid.ItemsSource = null; // Workaround to refresh the DataGrid
+                        dataGrid.ItemsSource = Workers_List;
+
+                        // Get the index of the newly added or edited person
+                        var index = Workers_List.IndexOf(worker);
+
+                        // Select the newly added or edited person
+                        dataGrid.SelectedIndex = index;
+
+                        // Scroll to the newly added or edited person
+                        dataGrid.ScrollIntoView(worker);
+
+                        dataGrid.UpdateLayout();
+                        DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(index);
+                        if (row != null)
                         {
-                            connection.Update(worker);
+                            row.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
                         }
+
+
+
                     }
-                    LoadWorkers();
-                }
+
+                }), DispatcherPriority.Background);
             }
         }
 
@@ -92,15 +125,24 @@ namespace Jobs_Planner.Windows.Tools
         {
             Close();
         }
-        private void AddEntry_Click(object sender, RoutedEventArgs e)
+
+        private void DeleteSelectedRow_Click(object sender, RoutedEventArgs e)
         {
-            
+            var selectedWorker = dataGrid.SelectedItem as Workers;
+            if (selectedWorker != null)
+            {
+                using (var connection = _databaseService.GetConnection())
+                {
+                    // Mark as deleted in the database
+                    selectedWorker.IsDeleted = true;
+                    connection.Update(selectedWorker);
+                }
+                // Remove from the ObservableCollection to update the UI
+                Workers_List.Remove(selectedWorker);
+            }
+
         }
 
-        private void MarkAsDeleted_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
         private void DataGrid_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
             DataGrid dataGrid = sender as DataGrid;

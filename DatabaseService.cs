@@ -31,8 +31,25 @@ namespace Jobs_Planner
                 db.CreateTable<Users>();
                 db.CreateTable<Role>();
                 db.CreateTable<Workers>();
-                
+                db.CreateTable<ConfigurationDataBase>();
+
+
+                var initialRoles = new List<Role>
+                {
+                    new Role { Name = "Admin" },
+                    new Role { Name = "Vartotojas" }
+                };
+                db.InsertAll(initialRoles);
+
+                var initialUsers = new List<Users>
+                {
+                    new Users{Username = "admin", Password="admin", RoleId = 1},
+                };
+                db.InsertAll(initialUsers);
+
             }
+
+
         }
 
     }

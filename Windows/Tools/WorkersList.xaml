@@ -12,32 +12,40 @@
     <Grid>
         <DataGrid
             x:Name="dataGrid"
-            Width="500"
-            Height="200"
+            Width="700"
+            Height="300"
             Margin="10,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             AutoGenerateColumns="False"
-            EnableRowVirtualization="True"
             CanUserAddRows="True"
-            CanUserDeleteRows="True"
+            CanUserDeleteRows="False"
+            EnableRowVirtualization="True"
             ItemsSource="{Binding Workers_List}"
             RowEditEnding="WorkersDataGrid_RowEditEnding"
             SelectionChanged="WorkersDataGrid_SelectionChanged">
+
             <DataGrid.Columns>
+
                 <DataGridTextColumn
-                    Binding="{Binding Id}"
-                    Header="ID"
-                    IsReadOnly="True" />
-                <DataGridTextColumn Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Header="Vardas" />
-                <DataGridTextColumn Binding="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Header="Pavardė" />
-                <DataGridCheckBoxColumn Header="Deleted" Binding="{Binding IsDeleted}" Width="*"/>
+                    Width="*"
+                    Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                    Header="Vardas" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"
+                    Header="Pavardė" />
+
             </DataGrid.Columns>
-            
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Click="DeleteSelectedRow_Click" Header="Ištrinti eilutę" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
         <Button
-            Width="75"
-            Margin="10,220,0,0"
+            Width="85"
+            Margin="10,350,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="Close_Click"

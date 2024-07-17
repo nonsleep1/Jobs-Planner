@@ -55,9 +55,19 @@ namespace Jobs_Planner
         private void Configuration_Click(object sender, RoutedEventArgs e)
         {
             //
+            if (_databaseService != null)
+            {
+                var workilistwindow = new Jobs_Planner.Windows.Tools.Configuration(_databaseService);
+                workilistwindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Database service is not initialized.");
+            }
         }
         private void WorkersList_Click(object sender, RoutedEventArgs e)
         {
+            //
             if(_databaseService != null)
             {
                 var workilistwindow = new WorkersList(_databaseService);
@@ -69,7 +79,7 @@ namespace Jobs_Planner
             }
 
             
-            //
+            
         }
     }
 }
