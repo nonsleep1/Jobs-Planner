@@ -20,7 +20,9 @@
             AutoGenerateColumns="False"
             CanUserAddRows="True"
             CanUserDeleteRows="True"
-            ItemsSource="{Binding Workers_List}">
+            ItemsSource="{Binding Workers_List}"
+            RowEditEnding="WorkersDataGrid_RowEditEnding"
+            SelectionChanged="WorkersDataGrid_SelectionChanged">>
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Binding="{Binding Id}"
