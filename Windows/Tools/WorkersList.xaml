@@ -1,0 +1,48 @@
+﻿<Window
+    x:Class="Jobs_Planner.Windows.Tools.WorkersList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Jobs_Planner.Windows.Tools"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Darbuotojų sąrašas"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Grid>
+        <DataGrid
+            x:Name="dataGrid"
+            Width="500"
+            Height="200"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            AutoGenerateColumns="False"
+            CanUserAddRows="True"
+            CanUserDeleteRows="True"
+            ItemsSource="{Binding Workers_List}">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Binding="{Binding Id}"
+                    Header="ID"
+                    IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Header="Vardas" />
+                <DataGridTextColumn Binding="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Header="Pavardė" />
+
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Click="AddEntry_Click" Header="Pridėti įrašą" />
+                    <MenuItem Click="MarkAsDeleted_Click" Header="Ištrinti įrašą" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <Button
+            Width="75"
+            Margin="10,220,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Close_Click"
+            Content="Uždaryti langą" />
+    </Grid>
+</Window>

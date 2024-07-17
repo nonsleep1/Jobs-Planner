@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Jobs_Planner.Database;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,16 @@ namespace Jobs_Planner
         public SQLiteConnection GetConnection()
         {
             return new SQLiteConnection(_dbPath);
+        }
+        public void Createdatabase(string dbPath)
+        {
+            using (var db = new SQLiteConnection(dbPath))
+            {
+                db.CreateTable<Users>();
+                db.CreateTable<Role>();
+                db.CreateTable<Workers>();
+                
+            }
         }
 
     }

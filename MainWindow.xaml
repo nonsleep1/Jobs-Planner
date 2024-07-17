@@ -18,7 +18,7 @@
 
             <MenuItem Header="Įrankiai">
                 <MenuItem Click="Configuration_Click" Header="Konfiguracija" />
-
+                <MenuItem Click="WorkersList_Click" Header="Darbuotojų sąrašas" />
             </MenuItem>
         </Menu>
 
