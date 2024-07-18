@@ -72,10 +72,7 @@ namespace Jobs_Planner.Windows.Tools
                                 connection.Update(worker);
                             }
                         }
-                        //LoadWorkers();
-
-
-                        //LoadWorkers();
+                        
                         // Ensure the newly added or edited item is selected and visible
                         dataGrid.CommitEdit(DataGridEditingUnit.Row, true);
                         dataGrid.ItemsSource = null; // Workaround to refresh the DataGrid

@@ -81,5 +81,17 @@ namespace Jobs_Planner
             
             
         }
+        private void JobsSymbols_Click(object sender, RoutedEventArgs e)
+        {
+            if (_databaseService != null)
+            {
+                var jobssymbolswindow = new JobsSymbolsWindow(_databaseService);
+                jobssymbolswindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Database service is not initialized.");
+            }
+        }
     }
 }

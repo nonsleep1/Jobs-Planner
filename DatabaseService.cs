@@ -32,6 +32,7 @@ namespace Jobs_Planner
                 db.CreateTable<Role>();
                 db.CreateTable<Workers>();
                 db.CreateTable<ConfigurationDataBase>();
+                db.CreateTable<JobsSymbols>();
 
 
                 var initialRoles = new List<Role>

@@ -19,6 +19,7 @@
             <MenuItem Header="Įrankiai">
                 <MenuItem Click="Configuration_Click" Header="Nustatymai" />
                 <MenuItem Click="WorkersList_Click" Header="Darbuotojų sąrašas" />
+                <MenuItem Click="JobsSymbols_Click" Header="Darbų simboliai" />
             </MenuItem>
         </Menu>
 
