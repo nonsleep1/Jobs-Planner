@@ -33,6 +33,8 @@ namespace Jobs_Planner
                 db.CreateTable<Workers>();
                 db.CreateTable<ConfigurationDataBase>();
                 db.CreateTable<JobsSymbols>();
+                db.CreateTable<FreqTime>();
+                db.CreateTable<Locations>();
 
 
                 var initialRoles = new List<Role>
@@ -44,9 +46,20 @@ namespace Jobs_Planner
 
                 var initialUsers = new List<Users>
                 {
-                    new Users{Username = "admin", Password="admin", RoleId = 1},
+                    new Users {Username = "admin", Password="admin", RoleId = 1},
                 };
                 db.InsertAll(initialUsers);
+
+                var initialFreqTime = new List<FreqTime>
+                {
+                    new FreqTime {name = "Valandos"},
+                    new FreqTime {name = "Dienos"},
+                    new FreqTime {name = "Savaitės"},
+                    new FreqTime {name = "Mėnesiai"},
+                    new FreqTime {name = "Metai"}
+                };
+                db.InsertAll(initialFreqTime);
+
 
             }
 

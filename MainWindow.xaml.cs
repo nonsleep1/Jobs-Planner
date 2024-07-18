@@ -93,5 +93,17 @@ namespace Jobs_Planner
                 MessageBox.Show("Database service is not initialized.");
             }
         }
+        private void LocationsList_Click(object sender, RoutedEventArgs e)
+        {
+            if (_databaseService != null)
+            {
+                var locationsswindow = new LocationWindow(_databaseService);
+                locationsswindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Database service is not initialized.");
+            }
+        }
     }
 }
