@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
-using System.Configuration;
+
 using System.IO;
 
 namespace Jobs_Planner
