@@ -11,7 +11,7 @@
     mc:Ignorable="d">
     <DockPanel>
 
-        <Menu x:Name="menu">
+        <Menu x:Name="menu" DockPanel.Dock="Top">
             <MenuItem Header="Failas">
                 <MenuItem Click="Shutdown_Click" Header="Išjungti" />
             </MenuItem>
