@@ -12,7 +12,7 @@ namespace Jobs_Planner
     public partial class App : Application
     {
 
-        private DatabaseService _databaseService;
+        private DatabaseService? _databaseService;
 
         protected override void OnStartup(StartupEventArgs e)
         {

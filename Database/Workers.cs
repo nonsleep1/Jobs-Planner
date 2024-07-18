@@ -11,14 +11,14 @@ namespace Jobs_Planner.Database
 {
     public class Workers : INotifyPropertyChanged
     {
-        private string _name;
-        private string _surname;
+        private string ?_name;
+        private string ?_surname;
         private bool _isdeleted;
 
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string Name 
+        public string? Name 
         {
 
             get => _name;
@@ -29,7 +29,7 @@ namespace Jobs_Planner.Database
             } 
         
         }
-        public string Surname 
+        public string? Surname 
         {
             get => _surname;
             set
