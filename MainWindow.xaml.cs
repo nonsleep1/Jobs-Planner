@@ -19,7 +19,7 @@ namespace Jobs_Planner
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly DatabaseService _databaseService;
+        private readonly DatabaseService? _databaseService;
 
         public MainWindow()
         {

@@ -39,15 +39,23 @@ namespace Jobs_Planner.Windows.Tools
         }
         private void LoadWorkers()
         {
-            using (var connection = _databaseService.GetConnection())
+            try 
             {
-                var _workers = connection.Table<Workers>().Where(p => !p.IsDeleted).ToList(); 
-                Workers_List.Clear();
-                foreach (var worker in _workers)
+                using (var connection = _databaseService.GetConnection())
                 {
-                    Workers_List.Add(worker);
+                    var _workers = connection.Table<Workers>().Where(p => !p.IsDeleted).ToList();
+                    Workers_List.Clear();
+                    foreach (var worker in _workers)
+                    {
+                        Workers_List.Add(worker);
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void WorkersDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)

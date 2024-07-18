@@ -14,15 +14,15 @@ namespace Jobs_Planner.Database
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Value { get; set; }
-        public string Description { get; set; }
+        public string? Name { get; set; }
+        public string? Value { get; set; }
+        public string? Description { get; set; }
 
 
 
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

@@ -39,15 +39,23 @@ namespace Jobs_Planner.Windows.Tools
 
         private void LoadJobsSymbols()
         {
-            using (var connection = _databaseService.GetConnection())
+            try 
             {
-                var _symbols = connection.Table<JobsSymbols>().Where(p => !p.IsDeleted).ToList();
-                JobsSymbols_List.Clear();
-                foreach (var symbol in _symbols)
+                using (var connection = _databaseService.GetConnection())
                 {
-                    JobsSymbols_List.Add(symbol);
+                    var _symbols = connection.Table<JobsSymbols>().Where(p => !p.IsDeleted).ToList();
+                    JobsSymbols_List.Clear();
+                    foreach (var symbol in _symbols)
+                    {
+                        JobsSymbols_List.Add(symbol);
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void JobsSymbolsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -142,7 +150,7 @@ namespace Jobs_Planner.Windows.Tools
 
         private void DataGrid_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
-            DataGrid JobsdataGrid = sender as DataGrid;
+            DataGrid? JobsdataGrid = sender as DataGrid;
             ContextMenu contextMenu = JobsdataGrid.ContextMenu;
             contextMenu.IsOpen = true;
         }

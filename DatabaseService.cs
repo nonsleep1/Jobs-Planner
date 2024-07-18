@@ -52,11 +52,11 @@ namespace Jobs_Planner
 
                 var initialFreqTime = new List<FreqTime>
                 {
-                    new FreqTime {name = "Valandos"},
-                    new FreqTime {name = "Dienos"},
-                    new FreqTime {name = "Savaitės"},
-                    new FreqTime {name = "Mėnesiai"},
-                    new FreqTime {name = "Metai"}
+                    new FreqTime {Name = "Valandos"},
+                    new FreqTime {Name = "Dienos"},
+                    new FreqTime {Name = "Savaitės"},
+                    new FreqTime {Name = "Mėnesiai"},
+                    new FreqTime {Name = "Metai"}
                 };
                 db.InsertAll(initialFreqTime);
 

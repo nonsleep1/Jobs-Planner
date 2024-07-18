@@ -37,15 +37,23 @@ namespace Jobs_Planner.Windows.Tools
 
         private void LoadLocations()
         {
-            using (var connection = _databaseService.GetConnection())
+            try 
             {
-                var _locations = connection.Table<Locations>().Where(p => !p.IsDeleted).ToList();
-                Locations_List.Clear();
-                foreach (var _location in _locations)
+                using (var connection = _databaseService.GetConnection())
                 {
-                    Locations_List.Add(_location);
+                    var _locations = connection.Table<Locations>().Where(p => !p.IsDeleted).ToList();
+                    Locations_List.Clear();
+                    foreach (var _location in _locations)
+                    {
+                        Locations_List.Add(_location);
+                    }
                 }
             }
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void LocationsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -140,7 +148,7 @@ namespace Jobs_Planner.Windows.Tools
 
         private void DataGrid_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
-            DataGrid JobsdataGrid = sender as DataGrid;
+            DataGrid? JobsdataGrid = sender as DataGrid;
             ContextMenu contextMenu = JobsdataGrid.ContextMenu;
             contextMenu.IsOpen = true;
         }
