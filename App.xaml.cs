@@ -41,7 +41,7 @@ namespace Jobs_Planner
 
                     if (!File.Exists(dbPath))
                     {
-                        MessageBoxResult result = MessageBox.Show("Nerasta duomenų bazė, nerasta database.db", "Ar sukurti database.db", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        MessageBoxResult result = MessageBox.Show("Nerasta duomenų bazė, nerasta database.db. Ar sukurti duomenų bazės failą?", "Ar sukurti database.db", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (result == MessageBoxResult.Yes)
                         {
                             //sukurti baze

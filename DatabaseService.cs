@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace Jobs_Planner
 {
     public class DatabaseService
@@ -46,7 +48,9 @@ namespace Jobs_Planner
 
                 var initialUsers = new List<Users>
                 {
-                    new Users {Username = "admin", Password="admin", RoleId = 1},
+                    new Users {Username = "admin", Password="admin",
+                    //    RoleId = 1
+                    },
                 };
                 db.InsertAll(initialUsers);
 
