@@ -21,6 +21,7 @@
                 <MenuItem Click="WorkersList_Click" Header="Darbuotojų sąrašas" />
                 <MenuItem Click="JobsSymbols_Click" Header="Darbų simboliai" />
                 <MenuItem Click="LocationsList_Click" Header="Įrengimų lokacijos" />
+                <MenuItem Click="DevicesList_Click" Header="Įrengimų sąrašas" />
             </MenuItem>
         </Menu>
 
@@ -29,8 +30,8 @@
 
 
         <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem>
-                <TextBlock x:Name="DateTextBlock" />
+            <StatusBarItem VerticalAlignment="Bottom">
+                <TextBlock x:Name="DateTextBlock" Text="Šiandienos data: " />
             </StatusBarItem>
 
         </StatusBar>

@@ -12,11 +12,12 @@ namespace Jobs_Planner.Database
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Part { get; set; }
-        public string Manufactor { get; set; }
-        public string Type { get; set; }
-        public string Note { get; set; }
+        public string? Name { get; set; }
+        public string? Part { get; set; }
+        public string? Manufactor { get; set; }
+        public string? Type { get; set; }
+        public string? Note { get; set; }
+        public int LocationId { get; set; }
         public bool IsDeleted { get; set; }
 
 

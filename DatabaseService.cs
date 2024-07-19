@@ -37,6 +37,7 @@ namespace Jobs_Planner
                 db.CreateTable<JobsSymbols>();
                 db.CreateTable<FreqTime>();
                 db.CreateTable<Locations>();
+                db.CreateTable<Devices>();
 
 
                 var initialRoles = new List<Role>

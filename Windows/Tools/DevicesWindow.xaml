@@ -11,7 +11,7 @@
     mc:Ignorable="d">
     <Grid>
         <DataGrid
-            x:Name="JobsDataGrid"
+            x:Name="DeviceDataGrid"
             Width="700"
             Height="300"
             Margin="10,10,0,0"
@@ -25,6 +25,13 @@
             RowEditEnding="DevicesDataGrid_RowEditEnding"
             SelectionChanged="DevicesDataGrid_SelectionChanged">
             <DataGrid.Columns>
+                <DataGridComboBoxColumn
+                    Width="*"
+                    DisplayMemberPath="Name"
+                    Header="Vietovė"
+                    ItemsSource="{Binding Locations_List}"
+                    SelectedValueBinding="{Binding LocationId, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedValuePath="Id" />
 
                 <DataGridTextColumn
                     Width="*"
