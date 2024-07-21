@@ -25,13 +25,21 @@
             RowEditEnding="DevicesDataGrid_RowEditEnding"
             SelectionChanged="DevicesDataGrid_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridComboBoxColumn
-                    Width="*"
-                    DisplayMemberPath="Name"
-                    Header="Vietovė"
-                    ItemsSource="{Binding Locations_List}"
-                    SelectedValueBinding="{Binding LocationId, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedValuePath="Id" />
+                <DataGridComboBoxColumn Header="Vietovė"
+                                        SelectedValueBinding="{Binding LocationId, UpdateSourceTrigger=PropertyChanged}"
+                                        DisplayMemberPath="Name"
+                                        SelectedValuePath="Id">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.Locations_List, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.Locations_List, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
 
                 <DataGridTextColumn
                     Width="*"

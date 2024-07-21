@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,10 @@ namespace Jobs_Planner.Database
 {
     public class Devices : INotifyPropertyChanged
     {
+
+        private int _locationsId;
+
+
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string? Name { get; set; }
@@ -18,8 +23,21 @@ namespace Jobs_Planner.Database
         public string? Type { get; set; }
         public string? Note { get; set; }
         public int LocationId { get; set; }
+        //public int LocationId 
+        //{
+        //    get => _locationsId;
+        //    set
+        //    {
+        //        if (_locationsId != value)
+        //        {
+        //            _locationsId = value;
+        //            OnPropertyChanged(nameof(LocationId));
+        //            Debug.WriteLine($"LocationsId updated to: {_locationsId}");
+        //        }
+        //    }
+        //}
         public bool IsDeleted { get; set; }
-
+        
 
 
 

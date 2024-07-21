@@ -117,12 +117,12 @@ namespace Jobs_Planner.Windows.Tools
                     {
                         using (var connection = _databaseService.GetConnection())
                         {
-                            if (device.Id == 0) // New Sybol
+                            if (device.Id == 0) // New device
                             {
                                 connection.Insert(device);
                                 device.Id = connection.ExecuteScalar<int>("SELECT last_insert_rowid()");
                             }
-                            else // Existing symbol
+                            else // Existing device
                             {
                                 connection.Update(device);
                             }
