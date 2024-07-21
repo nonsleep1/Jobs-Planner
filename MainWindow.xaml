@@ -24,8 +24,8 @@
                 <MenuItem Click="DevicesList_Click" Header="Įrengimų sąrašas" />
             </MenuItem>
         </Menu>
-
-
+        <Button x:Name="planedwork" Content="Planuojami darbai" Margin="10 10 10 10" Click="planedwork_Click" Height="25" Width="150" />
+        
 
 
 

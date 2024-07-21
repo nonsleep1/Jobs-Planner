@@ -119,5 +119,10 @@ namespace Jobs_Planner
             }
         }
 
+        private void planedwork_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
