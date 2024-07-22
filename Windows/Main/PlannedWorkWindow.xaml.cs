@@ -25,84 +25,86 @@ namespace Jobs_Planner.Windows.Main
 
         private readonly DatabaseService _databaseService;
 
-        public ObservableCollection<Devices> Devices_List { get; set; }
-        public ObservableCollection<Locations> Locations_List { get; set; }
-        public ObservableCollection<PlannedWork> PlannedWork_List { get; set; }
+        //public ObservableCollection<Devices> Devices_List { get; set; }
+        //public ObservableCollection<Locations> Locations_List { get; set; }
+        //public ObservableCollection<PlannedWork> PlannedWork_List { get; set; }
 
+        private PlannedWorkViewModel _viewModel;
 
         public PlannedWorkWindow(DatabaseService databaseService)
         {
             InitializeComponent();
             _databaseService = databaseService;
-            Devices_List = new ObservableCollection<Devices>();
-            Locations_List = new ObservableCollection<Locations>();
-            PlannedWork_List = new ObservableCollection<PlannedWork>();
-            LoadDevices();
-            LoadLocations();
-            LoadPlannedWorks();
 
-            this.DataContext = this;
+            _viewModel = new PlannedWorkViewModel();
+
+
+           // LoadDevices();
+            //LoadLocations();
+            //LoadPlannedWorks();
+
+            DataContext = _viewModel;
         }
 
-        private void LoadDevices()
-        {
-            try
-            {
-                using (var connection = _databaseService.GetConnection())
-                {
-                    var _devices = connection.Table<Devices>().Where(p => !p.IsDeleted).ToList();
-                    Devices_List.Clear();
-                    foreach (var device in _devices)
-                    {
-                        Devices_List.Add(device);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        //private void LoadDevices()
+        //{
+        //    try
+        //    {
+        //        using (var connection = _databaseService.GetConnection())
+        //        {
+        //            var _devices = connection.Table<Devices>().Where(p => !p.IsDeleted).ToList();
+        //            Devices_List.Clear();
+        //            foreach (var device in _devices)
+        //            {
+        //                Devices_List.Add(device);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
 
-        private void LoadLocations()
-        {
-            try
-            {
-                using (var connection = _databaseService.GetConnection())
-                {
-                    var _locations = connection.Table<Locations>().Where(p => !p.IsDeleted).ToList();
-                    Locations_List.Clear();
-                    foreach (var _location in _locations)
-                    {
-                        Locations_List.Add(_location);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        //private void LoadLocations()
+        //{
+        //    try
+        //    {
+        //        using (var connection = _databaseService.GetConnection())
+        //        {
+        //            var _locations = connection.Table<Locations>().Where(p => !p.IsDeleted).ToList();
+        //            Locations_List.Clear();
+        //            foreach (var _location in _locations)
+        //            {
+        //                Locations_List.Add(_location);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
 
-        private void LoadPlannedWorks()
-        {
-            try
-            {
-                using (var connection = _databaseService.GetConnection())
-                {
-                    var _plannedwork = connection.Table<PlannedWork>().Where(p => !p.IsDeleted).ToList();
-                    PlannedWork_List.Clear();
-                    foreach (var _planWork in _plannedwork)
-                    {
-                        PlannedWork_List.Add(_planWork);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        //private void LoadPlannedWorks()
+        //{
+        //    try
+        //    {
+        //        using (var connection = _databaseService.GetConnection())
+        //        {
+        //            var _plannedwork = connection.Table<PlannedWork>().Where(p => !p.IsDeleted).ToList();
+        //            PlannedWork_List.Clear();
+        //            foreach (var _planWork in _plannedwork)
+        //            {
+        //                PlannedWork_List.Add(_planWork);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
 
 
         private void PlannedWorkDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -113,7 +115,7 @@ namespace Jobs_Planner.Windows.Main
                 using (var connection = _databaseService.GetConnection())
                 {
                     connection.Delete(selectedwork);
-                    PlannedWork_List.Remove(selectedwork);
+                    _viewModel.PlannedWork_List.Remove(selectedwork);
                 }
             }
         }
@@ -150,10 +152,10 @@ namespace Jobs_Planner.Windows.Main
                         // Ensure the newly added or edited item is selected and visible
                         PlannedWorkDataGrid.CommitEdit(DataGridEditingUnit.Row, true);
                         PlannedWorkDataGrid.ItemsSource = null; // Workaround to refresh the DataGrid
-                        PlannedWorkDataGrid.ItemsSource = PlannedWork_List;
+                        PlannedWorkDataGrid.ItemsSource = _viewModel.PlannedWork_List;
 
                         // Get the index of the newly added or edited person
-                        var index = PlannedWork_List.IndexOf(planedwork);
+                        var index = _viewModel.PlannedWork_List.IndexOf(planedwork);
 
                         // Select the newly added or edited person
                         PlannedWorkDataGrid.SelectedIndex = index;
@@ -188,7 +190,7 @@ namespace Jobs_Planner.Windows.Main
                     connection.Update(selectedwork);
                 }
                 // Remove from the ObservableCollection to update the UI
-                PlannedWork_List.Remove(selectedwork);
+                _viewModel.PlannedWork_List.Remove(selectedwork);
             }
 
         }

@@ -42,10 +42,11 @@
                         </Style>
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
+
                 <DataGridComboBoxColumn
                     DisplayMemberPath="Name"
                     Header="Įrenginys"
-                    SelectedValueBinding="{Binding LocationId, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedValueBinding="{Binding DeviceId, UpdateSourceTrigger=PropertyChanged}"
                     SelectedValuePath="Id">
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
@@ -58,24 +59,6 @@
                         </Style>
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
-
-                <DataGridComboBoxColumn
-                    DisplayMemberPath="Part"
-                    Header="Detalė"
-                    SelectedValueBinding="{Binding LocationId, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedValuePath="Id">
-                    <DataGridComboBoxColumn.ElementStyle>
-                        <Style TargetType="ComboBox">
-                            <Setter Property="ItemsSource" Value="{Binding DataContext.Devices_List, RelativeSource={RelativeSource AncestorType=Window}}" />
-                        </Style>
-                    </DataGridComboBoxColumn.ElementStyle>
-                    <DataGridComboBoxColumn.EditingElementStyle>
-                        <Style TargetType="ComboBox">
-                            <Setter Property="ItemsSource" Value="{Binding DataContext.Devices_List, RelativeSource={RelativeSource AncestorType=Window}}" />
-                        </Style>
-                    </DataGridComboBoxColumn.EditingElementStyle>
-                </DataGridComboBoxColumn>
-
 
                 <DataGridTextColumn
                     Width="*"
