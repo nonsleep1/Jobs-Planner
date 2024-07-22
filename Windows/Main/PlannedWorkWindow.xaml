@@ -1,0 +1,112 @@
+﻿<Window
+    x:Class="Jobs_Planner.Windows.Main.PlannedWorkWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Jobs_Planner.Windows.Main"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Planuojami darbai"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Grid>
+        <DataGrid
+            x:Name="PlannedWorkDataGrid"
+            Width="700"
+            Height="300"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            AutoGenerateColumns="False"
+            CanUserAddRows="True"
+            CanUserDeleteRows="False"
+            EnableRowVirtualization="True"
+            ItemsSource="{Binding PlannedWork_List}"
+            RowEditEnding="PlannedWorkDataGrid_RowEditEnding"
+            SelectionChanged="PlannedWorkDataGrid_SelectionChanged">
+
+            <DataGrid.Columns>
+                <DataGridComboBoxColumn
+                    DisplayMemberPath="Name"
+                    Header="Vietovė"
+                    SelectedValueBinding="{Binding LocationId, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedValuePath="Id">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.Locations_List, RelativeSource={RelativeSource AncestorType=Window}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.Locations_List, RelativeSource={RelativeSource AncestorType=Window}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridComboBoxColumn
+                    DisplayMemberPath="Name"
+                    Header="Įrenginys"
+                    SelectedValueBinding="{Binding LocationId, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedValuePath="Id">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.Devices_List, RelativeSource={RelativeSource AncestorType=Window}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.Devices_List, RelativeSource={RelativeSource AncestorType=Window}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+
+                <DataGridComboBoxColumn
+                    DisplayMemberPath="Part"
+                    Header="Detalė"
+                    SelectedValueBinding="{Binding LocationId, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedValuePath="Id">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.Devices_List, RelativeSource={RelativeSource AncestorType=Window}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.Devices_List, RelativeSource={RelativeSource AncestorType=Window}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+
+
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Part, UpdateSourceTrigger=PropertyChanged}"
+                    Header="Dalies pavadinimas" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Manufactor, UpdateSourceTrigger=PropertyChanged}"
+                    Header="Gamintojas" />
+
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Type, UpdateSourceTrigger=PropertyChanged}"
+                    Header="Tipas" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Note, UpdateSourceTrigger=PropertyChanged}"
+                    Header="Pastabos" />
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Click="DeleteSelectedRow_Click" Header="Ištrinti eilutę" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <Button
+            Width="85"
+            Margin="10,350,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Close_Click"
+            Content="Uždaryti langą" />
+    </Grid>
+</Window>

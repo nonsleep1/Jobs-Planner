@@ -9,13 +9,12 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
-    <DockPanel>
 
+    <DockPanel>
         <Menu x:Name="menu" DockPanel.Dock="Top">
             <MenuItem Header="Failas">
                 <MenuItem Click="Shutdown_Click" Header="Išjungti" />
             </MenuItem>
-
             <MenuItem Header="Įrankiai">
                 <MenuItem Click="Configuration_Click" Header="Nustatymai" />
                 <MenuItem Click="WorkersList_Click" Header="Darbuotojų sąrašas" />
@@ -24,17 +23,36 @@
                 <MenuItem Click="DevicesList_Click" Header="Įrengimų sąrašas" />
             </MenuItem>
         </Menu>
-        <Button x:Name="planedwork" Content="Planuojami darbai" Margin="10 10 10 10" Click="planedwork_Click" Height="25" Width="150" />
-        
-
 
 
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem VerticalAlignment="Bottom">
                 <TextBlock x:Name="DateTextBlock" Text="Šiandienos data: " />
             </StatusBarItem>
-
         </StatusBar>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button
+                x:Name="plannedwork"
+                Width="150"
+                Height="25"
+                Margin="10"
+                Click="Plannedwork_Click"
+                Content="Planuojami darbai" />
+            <Button
+                x:Name="unplanedwork"
+                Width="150"
+                Height="25"
+                Margin="10"
+                Click="Unplanedwork_Click"
+                Content="Neplanuojami darbai" />
+            <Button
+                x:Name="refreshtodaywork"
+                Margin="10,10,10,10"
+                Click="Refreshtodaywork_Click"
+                Content="Atnaujinti sąraša šios dienos darbų" />
+        </StackPanel>
+
 
     </DockPanel>
 </Window>

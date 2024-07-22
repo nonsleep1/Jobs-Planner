@@ -119,7 +119,25 @@ namespace Jobs_Planner
             }
         }
 
-        private void planedwork_Click(object sender, RoutedEventArgs e)
+        private void Plannedwork_Click(object sender, RoutedEventArgs e)
+        {
+            if (_databaseService != null)
+            {
+                var plannedWorkWindow = new Jobs_Planner.Windows.Main.PlannedWorkWindow(_databaseService);
+                plannedWorkWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Database service is not initialized.");
+            }
+        }
+
+        private void Unplanedwork_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Refreshtodaywork_Click(object sender, EventArgs e)
         {
 
         }
