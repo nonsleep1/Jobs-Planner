@@ -29,16 +29,19 @@
                 <DataGridComboBoxColumn
                     DisplayMemberPath="Name"
                     Header="Vietovė"
-                    SelectedValueBinding="{Binding LocationId, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedValueBinding="{Binding LocationId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     SelectedValuePath="Id">
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding DataContext.Locations_List, RelativeSource={RelativeSource AncestorType=Window}}" />
+
                         </Style>
                     </DataGridComboBoxColumn.ElementStyle>
                     <DataGridComboBoxColumn.EditingElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding DataContext.Locations_List, RelativeSource={RelativeSource AncestorType=Window}}" />
+
+
                         </Style>
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
@@ -46,7 +49,24 @@
                 <DataGridComboBoxColumn
                     DisplayMemberPath="Name"
                     Header="Įrenginys"
-                    SelectedValueBinding="{Binding DeviceId, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedValueBinding="{Binding DeviceId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedValuePath="Id">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.FilteredDevices_List, RelativeSource={RelativeSource AncestorType=Window}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding DataContext.FilteredDevices_List, RelativeSource={RelativeSource AncestorType=Window}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+
+                <DataGridComboBoxColumn
+                    DisplayMemberPath="Part"
+                    Header="Dalis"
+                    SelectedValueBinding="{Binding DeviceId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     SelectedValuePath="Id">
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
@@ -59,24 +79,6 @@
                         </Style>
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
-
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Part, UpdateSourceTrigger=PropertyChanged}"
-                    Header="Dalies pavadinimas" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Manufactor, UpdateSourceTrigger=PropertyChanged}"
-                    Header="Gamintojas" />
-
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Type, UpdateSourceTrigger=PropertyChanged}"
-                    Header="Tipas" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Note, UpdateSourceTrigger=PropertyChanged}"
-                    Header="Pastabos" />
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>

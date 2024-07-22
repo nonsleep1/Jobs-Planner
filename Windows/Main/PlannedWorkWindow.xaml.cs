@@ -36,7 +36,7 @@ namespace Jobs_Planner.Windows.Main
             InitializeComponent();
             _databaseService = databaseService;
 
-            _viewModel = new PlannedWorkViewModel();
+            _viewModel = new PlannedWorkViewModel(_databaseService);
 
 
            // LoadDevices();
@@ -190,11 +190,13 @@ namespace Jobs_Planner.Windows.Main
                     connection.Update(selectedwork);
                 }
                 // Remove from the ObservableCollection to update the UI
-                _viewModel.PlannedWork_List.Remove(selectedwork);
+                if (PlannedWorkDataGrid.SelectedItem is PlannedWork selectedWork)
+                {
+                    _viewModel.PlannedWork_List.Remove(selectedWork);
+                }
+
             }
-
         }
-
         private void DataGrid_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
             DataGrid? PlannedWorkDataGrid = sender as DataGrid;

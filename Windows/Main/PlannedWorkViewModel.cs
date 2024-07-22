@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Jobs_Planner.Windows.Main
 {
@@ -15,7 +16,11 @@ namespace Jobs_Planner.Windows.Main
         private ObservableCollection<PlannedWork> _plannedWorkList;
         private ObservableCollection<Locations> _locationsList;
         private ObservableCollection<Devices> _devicesList;
+        private readonly DatabaseService _databaseService;
 
+        private ObservableCollection<Devices> _filteredDevicesList;
+
+        private Locations _selectedLocation;
 
         public ObservableCollection<PlannedWork> PlannedWork_List
         {
@@ -44,10 +49,140 @@ namespace Jobs_Planner.Windows.Main
             {
                 _devicesList = value;
                 OnPropertyChanged(nameof(Devices_List));
+                FilterDevices();
             }
         }
 
+        public ObservableCollection<Devices> FilteredDevices_List
+        {
+            get => _filteredDevicesList;
+            set
+            {
+                _filteredDevicesList = value;
+                OnPropertyChanged(nameof(FilteredDevices_List));
+            }
+        }
 
+        public Locations SelectedLocation
+        {
+            get => _selectedLocation;
+            set
+            {
+                _selectedLocation = value;
+                OnPropertyChanged(nameof(SelectedLocation));
+                FilterDevices();
+            }
+        }
+
+        public PlannedWorkViewModel(DatabaseService databaseService)
+        {
+            // Load data into the collections
+            _databaseService = databaseService;
+
+            PlannedWork_List = new ObservableCollection<PlannedWork>();
+            Locations_List = new ObservableCollection<Locations>();
+            Devices_List = new ObservableCollection<Devices>();
+            FilteredDevices_List = new ObservableCollection<Devices>();
+
+            LoadData();
+            
+        }
+
+
+       
+
+        private void LoadData()
+        {
+            // This method should load the data from your SQLite database
+            // For now, we'll add some sample data for illustration purposes
+
+
+            try
+            {
+                using (var connection = _databaseService.GetConnection())
+                {
+                    var _devices = connection.Table<Devices>().Where(p => !p.IsDeleted).ToList();
+                    Devices_List = new ObservableCollection<Devices>(_devices);           
+                    
+                    //foreach (var device in _devices)
+                    //{
+                    //    Devices_List.Add(device);
+                    //}
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            ////
+            
+            try
+            {
+                using (var connection = _databaseService.GetConnection())
+                {
+                    var _plannedwork = connection.Table<PlannedWork>().Where(p => !p.IsDeleted).ToList();
+                    PlannedWork_List = new ObservableCollection<PlannedWork>(_plannedwork);
+                    //foreach (var _planWork in _plannedwork)
+                    //{
+                    //    PlannedWork_List.Add(_planWork);
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            ///
+
+            try
+            {
+                using (var connection = _databaseService.GetConnection())
+                {
+                    var _locations = connection.Table<Locations>().Where(p => !p.IsDeleted).ToList();
+                    Locations_List = new ObservableCollection<Locations>(_locations);
+                    //foreach (var _location in _locations)
+                    //{
+                    //    Locations_List.Add(_location);
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            FilterDevices();
+
+        }
+
+        private void FilterDevices()
+        {
+
+
+            if (FilteredDevices_List == null)
+            {
+                FilteredDevices_List = new ObservableCollection<Devices>();
+            }
+
+
+
+            if (SelectedLocation != null)
+            {
+                var filteredDevices = Devices_List.Where(d => d.LocationId == SelectedLocation.Id).ToList();
+                FilteredDevices_List.Clear();
+                foreach (var device in filteredDevices)
+                {
+                    FilteredDevices_List.Add(device);
+                }
+            }
+            else
+            {
+                FilteredDevices_List.Clear();
+            }
+        }
 
 
 
