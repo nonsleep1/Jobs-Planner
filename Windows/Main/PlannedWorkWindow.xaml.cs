@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,12 +32,16 @@ namespace Jobs_Planner.Windows.Main
 
         private PlannedWorkViewModel _viewModel;
 
-        public PlannedWorkWindow(DatabaseService databaseService)
+        public PlannedWorkWindow()
         {
             InitializeComponent();
-            _databaseService = databaseService;
 
-            _viewModel = new PlannedWorkViewModel(_databaseService);
+            var dbPath = ConfigurationManager.AppSettings["DatabasePath"];
+            dbPath = Environment.ExpandEnvironmentVariables(dbPath);
+
+            _databaseService = new DatabaseService(dbPath);
+
+            _viewModel = new PlannedWorkViewModel(dbPath);
 
 
            // LoadDevices();
@@ -46,65 +51,7 @@ namespace Jobs_Planner.Windows.Main
             DataContext = _viewModel;
         }
 
-        //private void LoadDevices()
-        //{
-        //    try
-        //    {
-        //        using (var connection = _databaseService.GetConnection())
-        //        {
-        //            var _devices = connection.Table<Devices>().Where(p => !p.IsDeleted).ToList();
-        //            Devices_List.Clear();
-        //            foreach (var device in _devices)
-        //            {
-        //                Devices_List.Add(device);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
-
-        //private void LoadLocations()
-        //{
-        //    try
-        //    {
-        //        using (var connection = _databaseService.GetConnection())
-        //        {
-        //            var _locations = connection.Table<Locations>().Where(p => !p.IsDeleted).ToList();
-        //            Locations_List.Clear();
-        //            foreach (var _location in _locations)
-        //            {
-        //                Locations_List.Add(_location);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
-
-        //private void LoadPlannedWorks()
-        //{
-        //    try
-        //    {
-        //        using (var connection = _databaseService.GetConnection())
-        //        {
-        //            var _plannedwork = connection.Table<PlannedWork>().Where(p => !p.IsDeleted).ToList();
-        //            PlannedWork_List.Clear();
-        //            foreach (var _planWork in _plannedwork)
-        //            {
-        //                PlannedWork_List.Add(_planWork);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
+        
 
 
         private void PlannedWorkDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

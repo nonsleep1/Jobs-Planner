@@ -74,17 +74,20 @@ namespace Jobs_Planner.Windows.Main
             }
         }
 
-        public PlannedWorkViewModel(DatabaseService databaseService)
+        public PlannedWorkViewModel(string dbPath)
         {
             // Load data into the collections
-            _databaseService = databaseService;
+            _databaseService = new DatabaseService(dbPath);
 
-            PlannedWork_List = new ObservableCollection<PlannedWork>();
-            Locations_List = new ObservableCollection<Locations>();
-            Devices_List = new ObservableCollection<Devices>();
-            FilteredDevices_List = new ObservableCollection<Devices>();
+            //PlannedWork_List = new ObservableCollection<PlannedWork>();
+            //Locations_List = new ObservableCollection<Locations>();
+            //Devices_List = new ObservableCollection<Devices>();
 
             LoadData();
+
+            FilteredDevices_List = new ObservableCollection<Devices>();
+
+            
             
         }
 
@@ -97,18 +100,82 @@ namespace Jobs_Planner.Windows.Main
             // For now, we'll add some sample data for illustration purposes
 
 
+            //try
+            //{
+            //    using (var connection = _databaseService.GetConnection())
+            //    {
+            //        var _devices = connection.Table<Devices>().Where(p => !p.IsDeleted).ToList();
+            //        Devices_List = new ObservableCollection<Devices>(_devices);           
+
+            //        //foreach (var device in _devices)
+            //        //{
+            //        //    Devices_List.Add(device);
+            //        //}
+
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+
+            //////
+
+            //try
+            //{
+            //    using (var connection = _databaseService.GetConnection())
+            //    {
+            //        var _plannedwork = connection.Table<PlannedWork>().Where(p => !p.IsDeleted).ToList();
+            //        PlannedWork_List = new ObservableCollection<PlannedWork>(_plannedwork);
+            //        //foreach (var _planWork in _plannedwork)
+            //        //{
+            //        //    PlannedWork_List.Add(_planWork);
+            //        //}
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+
+            /////
+
+            //try
+            //{
+            //    using (var connection = _databaseService.GetConnection())
+            //    {
+            //        var _locations = connection.Table<Locations>().Where(p => !p.IsDeleted).ToList();
+            //        Locations_List = new ObservableCollection<Locations>(_locations);
+            //        //foreach (var _location in _locations)
+            //        //{
+            //        //    Locations_List.Add(_location);
+            //        //}
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+
+            // FilteredDevices_List = new ObservableCollection<Devices>();
+
+            // FilterDevices();
+
+
+
+
             try
             {
                 using (var connection = _databaseService.GetConnection())
                 {
-                    var _devices = connection.Table<Devices>().Where(p => !p.IsDeleted).ToList();
-                    Devices_List = new ObservableCollection<Devices>(_devices);           
-                    
-                    //foreach (var device in _devices)
-                    //{
-                    //    Devices_List.Add(device);
-                    //}
+                    var devices = connection.Table<Devices>().Where(p => !p.IsDeleted).ToList();
+                    Devices_List = new ObservableCollection<Devices>(devices);
 
+                    var plannedWork = connection.Table<PlannedWork>().Where(p => !p.IsDeleted).ToList();
+                    PlannedWork_List = new ObservableCollection<PlannedWork>(plannedWork);
+
+                    var locations = connection.Table<Locations>().Where(p => !p.IsDeleted).ToList();
+                    Locations_List = new ObservableCollection<Locations>(locations);
                 }
             }
             catch (Exception ex)
@@ -116,45 +183,7 @@ namespace Jobs_Planner.Windows.Main
                 MessageBox.Show(ex.Message);
             }
 
-            ////
-            
-            try
-            {
-                using (var connection = _databaseService.GetConnection())
-                {
-                    var _plannedwork = connection.Table<PlannedWork>().Where(p => !p.IsDeleted).ToList();
-                    PlannedWork_List = new ObservableCollection<PlannedWork>(_plannedwork);
-                    //foreach (var _planWork in _plannedwork)
-                    //{
-                    //    PlannedWork_List.Add(_planWork);
-                    //}
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
 
-            ///
-
-            try
-            {
-                using (var connection = _databaseService.GetConnection())
-                {
-                    var _locations = connection.Table<Locations>().Where(p => !p.IsDeleted).ToList();
-                    Locations_List = new ObservableCollection<Locations>(_locations);
-                    //foreach (var _location in _locations)
-                    //{
-                    //    Locations_List.Add(_location);
-                    //}
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            FilterDevices();
 
         }
 

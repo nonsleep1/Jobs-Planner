@@ -123,7 +123,7 @@ namespace Jobs_Planner
         {
             if (_databaseService != null)
             {
-                var plannedWorkWindow = new Jobs_Planner.Windows.Main.PlannedWorkWindow(_databaseService);
+                var plannedWorkWindow = new Jobs_Planner.Windows.Main.PlannedWorkWindow();
                 plannedWorkWindow.Show();
             }
             else
