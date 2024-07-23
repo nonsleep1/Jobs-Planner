@@ -41,7 +41,7 @@ namespace Jobs_Planner.Windows.Main
 
             _databaseService = new DatabaseService(dbPath);
 
-            _viewModel = new PlannedWorkViewModel(dbPath);
+            _viewModel = new PlannedWorkViewModel();
 
 
            // LoadDevices();

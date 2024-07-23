@@ -9,6 +9,11 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
+
+    <Window.DataContext>
+        <local:PlannedWorkViewModel />
+    </Window.DataContext>
+
     <Grid>
         <DataGrid
             x:Name="PlannedWorkDataGrid"

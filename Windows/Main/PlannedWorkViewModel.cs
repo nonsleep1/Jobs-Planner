@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,18 +75,23 @@ namespace Jobs_Planner.Windows.Main
             }
         }
 
-        public PlannedWorkViewModel(string dbPath)
+        public PlannedWorkViewModel()
         {
+
+            string dbPath = ConfigurationManager.AppSettings["DatabasePath"];
+            dbPath = Environment.ExpandEnvironmentVariables(dbPath);
             // Load data into the collections
             _databaseService = new DatabaseService(dbPath);
 
-            //PlannedWork_List = new ObservableCollection<PlannedWork>();
-            //Locations_List = new ObservableCollection<Locations>();
-            //Devices_List = new ObservableCollection<Devices>();
+            PlannedWork_List = new ObservableCollection<PlannedWork>();
+            Locations_List = new ObservableCollection<Locations>();
+            Devices_List = new ObservableCollection<Devices>();
+            FilteredDevices_List = new ObservableCollection<Devices>();
+
 
             LoadData();
 
-            FilteredDevices_List = new ObservableCollection<Devices>();
+            
 
             
             
