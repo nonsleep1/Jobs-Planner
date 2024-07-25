@@ -17,9 +17,10 @@ namespace Jobs_Planner.Windows.Main
         private ObservableCollection<PlannedWork> _plannedWorkList;
         private ObservableCollection<Locations> _locationsList;
         private ObservableCollection<Devices> _devicesList;
+        private ObservableCollection<Devices> _filteredDevicesList;
         private readonly DatabaseService _databaseService;
 
-        private ObservableCollection<Devices> _filteredDevicesList;
+        
 
         private Locations _selectedLocation;
 

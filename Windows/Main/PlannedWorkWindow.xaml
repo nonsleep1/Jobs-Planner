@@ -39,13 +39,13 @@
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding DataContext.Locations_List, RelativeSource={RelativeSource AncestorType=Window}}" />
-                            <Setter Property="SelectedItem" Value="{Binding LocationId, Mode=TwoWay}" />
+                            <Setter Property="SelectedValue" Value="{Binding LocationId, Mode=TwoWay}" />
                         </Style>
                     </DataGridComboBoxColumn.ElementStyle>
                     <DataGridComboBoxColumn.EditingElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding DataContext.Locations_List, RelativeSource={RelativeSource AncestorType=Window}}" />
-                            <Setter Property="SelectedItem" Value="{Binding LocationId, Mode=TwoWay}" />
+                            <Setter Property="SelectedValue" Value="{Binding LocationId, Mode=TwoWay}" />
 
                         </Style>
                     </DataGridComboBoxColumn.EditingElementStyle>
@@ -59,13 +59,13 @@
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding DataContext.FilteredDevices_List, RelativeSource={RelativeSource AncestorType=Window}}" />
-                            <Setter Property="SelectedItem" Value="{Binding DeviceId, Mode=TwoWay}" />
+                            <Setter Property="SelectedValue" Value="{Binding DeviceId, Mode=TwoWay}" />
                         </Style>
                     </DataGridComboBoxColumn.ElementStyle>
                     <DataGridComboBoxColumn.EditingElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding DataContext.FilteredDevices_List, RelativeSource={RelativeSource AncestorType=Window}}" />
-                            <Setter Property="SelectedItem" Value="{Binding DeviceId, Mode=TwoWay}" />
+                            <Setter Property="SelectedValue" Value="{Binding DeviceId, Mode=TwoWay}" />
                         </Style>
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
