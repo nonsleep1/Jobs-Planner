@@ -37,6 +37,7 @@ namespace Jobs_Planner.Windows.Main
             InitializeComponent();
 
             var dbPath = ConfigurationManager.AppSettings["DatabasePath"];
+            if (dbPath == null) { throw new ArgumentNullException(); }
             dbPath = Environment.ExpandEnvironmentVariables(dbPath);
 
             _databaseService = new DatabaseService(dbPath);

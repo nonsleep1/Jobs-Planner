@@ -13,11 +13,21 @@ namespace Jobs_Planner.Database
     {
 
         private int _locationsId;
-
+        private string _name;
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string? Name { get; set; }
+        public string Name 
+        { 
+            get => _name;
+            set
+            {
+                if (value == null)
+                { throw new ArgumentNullException(nameof(value)); }
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
         public string? Part { get; set; }
         public string? Manufactor { get; set; }
         public string? Type { get; set; }

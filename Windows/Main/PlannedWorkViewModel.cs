@@ -72,6 +72,7 @@ namespace Jobs_Planner.Windows.Main
             {
                 _selectedLocation = value;
                 OnPropertyChanged(nameof(SelectedLocation));
+                MessageBox.Show($"SelectedLocation changed to: {SelectedLocation?.Name}");
                 FilterDevices();
             }
         }
@@ -80,6 +81,7 @@ namespace Jobs_Planner.Windows.Main
         {
 
             string dbPath = ConfigurationManager.AppSettings["DatabasePath"];
+            if( dbPath == null ) { throw new NullReferenceException(nameof(dbPath)); }
             dbPath = Environment.ExpandEnvironmentVariables(dbPath);
             // Load data into the collections
             _databaseService = new DatabaseService(dbPath);
@@ -103,74 +105,7 @@ namespace Jobs_Planner.Windows.Main
 
         private void LoadData()
         {
-            // This method should load the data from your SQLite database
-            // For now, we'll add some sample data for illustration purposes
-
-
-            //try
-            //{
-            //    using (var connection = _databaseService.GetConnection())
-            //    {
-            //        var _devices = connection.Table<Devices>().Where(p => !p.IsDeleted).ToList();
-            //        Devices_List = new ObservableCollection<Devices>(_devices);           
-
-            //        //foreach (var device in _devices)
-            //        //{
-            //        //    Devices_List.Add(device);
-            //        //}
-
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-
-            //////
-
-            //try
-            //{
-            //    using (var connection = _databaseService.GetConnection())
-            //    {
-            //        var _plannedwork = connection.Table<PlannedWork>().Where(p => !p.IsDeleted).ToList();
-            //        PlannedWork_List = new ObservableCollection<PlannedWork>(_plannedwork);
-            //        //foreach (var _planWork in _plannedwork)
-            //        //{
-            //        //    PlannedWork_List.Add(_planWork);
-            //        //}
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-
-            /////
-
-            //try
-            //{
-            //    using (var connection = _databaseService.GetConnection())
-            //    {
-            //        var _locations = connection.Table<Locations>().Where(p => !p.IsDeleted).ToList();
-            //        Locations_List = new ObservableCollection<Locations>(_locations);
-            //        //foreach (var _location in _locations)
-            //        //{
-            //        //    Locations_List.Add(_location);
-            //        //}
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-
-            // FilteredDevices_List = new ObservableCollection<Devices>();
-
-            // FilterDevices();
-
-
-
-
+           
             try
             {
                 using (var connection = _databaseService.GetConnection())
@@ -196,10 +131,11 @@ namespace Jobs_Planner.Windows.Main
 
         private void FilterDevices()
         {
-
+            MessageBox.Show("FilterDevices method called");
 
             if (FilteredDevices_List == null)
             {
+                
                 FilteredDevices_List = new ObservableCollection<Devices>();
             }
 
@@ -207,6 +143,7 @@ namespace Jobs_Planner.Windows.Main
 
             if (SelectedLocation != null)
             {
+                MessageBox.Show($"Filtering devices for location: {SelectedLocation.Name}");
                 var filteredDevices = Devices_List.Where(d => d.LocationId == SelectedLocation.Id).ToList();
                 FilteredDevices_List.Clear();
                 foreach (var device in filteredDevices)
@@ -229,6 +166,8 @@ namespace Jobs_Planner.Windows.Main
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
+            MessageBox.Show($"PropertyChanged: {propertyName}");
+
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 

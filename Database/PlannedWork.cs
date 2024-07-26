@@ -12,6 +12,17 @@ namespace Jobs_Planner.Database
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        private Locations _selectedLocation;
+        public Locations SelectedLocation
+        {
+            get => _selectedLocation;
+            set
+            {
+                _selectedLocation = value;
+                OnPropertyChanged(nameof(SelectedLocation));
+            }
+        }
+
         public int LocationId { get; set; }
         public int DeviceId { get; set; }
         
