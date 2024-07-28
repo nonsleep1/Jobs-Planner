@@ -118,6 +118,8 @@ namespace Jobs_Planner.Windows.Main
 
                     var locations = connection.Table<Locations>().Where(p => !p.IsDeleted).ToList();
                     Locations_List = new ObservableCollection<Locations>(locations);
+
+                    PlannedWork.LocationsList = locations;
                 }
             }
             catch (Exception ex)
@@ -127,11 +129,12 @@ namespace Jobs_Planner.Windows.Main
 
 
 
+
         }
 
         private void FilterDevices()
         {
-            MessageBox.Show("FilterDevices method called");
+            //MessageBox.Show("FilterDevices method called");
 
             if (FilteredDevices_List == null)
             {
@@ -166,7 +169,7 @@ namespace Jobs_Planner.Windows.Main
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            MessageBox.Show($"PropertyChanged: {propertyName}");
+           // MessageBox.Show($"PropertyChanged: {propertyName}");
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

@@ -39,13 +39,13 @@
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding DataContext.Locations_List, RelativeSource={RelativeSource AncestorType=Window}}" />
-                            <Setter Property="SelectedValue" Value="{Binding SelectedLocation, Mode=TwoWay}" />
+                            <Setter Property="SelectedValue" Value="{Binding LocationId, Mode=TwoWay}" />
                         </Style>
                     </DataGridComboBoxColumn.ElementStyle>
                     <DataGridComboBoxColumn.EditingElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding DataContext.Locations_List, RelativeSource={RelativeSource AncestorType=Window}}" />
-                            <Setter Property="SelectedValue" Value="{Binding SelectedLocation, Mode=TwoWay}" />
+                            <Setter Property="SelectedValue" Value="{Binding LocationId, Mode=TwoWay}" />
                         </Style>
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
@@ -68,35 +68,16 @@
                         </Style>
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
-
-                <DataGridComboBoxColumn
-                    DisplayMemberPath="Part"
-                    Header="Dalis"
-                    SelectedValueBinding="{Binding DeviceId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedValuePath="Id">
-                    <DataGridComboBoxColumn.ElementStyle>
-                        <Style TargetType="ComboBox">
-                            <Setter Property="ItemsSource" Value="{Binding DataContext.Devices_List, RelativeSource={RelativeSource AncestorType=Window}}" />
-                        </Style>
-                    </DataGridComboBoxColumn.ElementStyle>
-                    <DataGridComboBoxColumn.EditingElementStyle>
-                        <Style TargetType="ComboBox">
-                            <Setter Property="ItemsSource" Value="{Binding DataContext.Devices_List, RelativeSource={RelativeSource AncestorType=Window}}" />
-                        </Style>
-                    </DataGridComboBoxColumn.EditingElementStyle>
-                </DataGridComboBoxColumn>
             </DataGrid.Columns>
-
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Click="DeleteSelectedRow_Click" Header="Ištrinti eilutę" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
-
         <Button
             Width="85"
-            Margin="10,370,0,0"
+            Margin="10,350,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="Close_Click"

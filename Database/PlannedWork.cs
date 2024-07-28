@@ -12,28 +12,48 @@ namespace Jobs_Planner.Database
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+
+        private int _locationId;
+        [Indexed]
+        public int LocationId
+        {
+            get => _locationId;
+            set
+            {
+                if (_locationId != value)
+                {
+                    _locationId = value;
+                    OnPropertyChanged(nameof(LocationId));
+                    // Update SelectedLocation whenever LocationId is changed
+                    SelectedLocation = LocationsList?.FirstOrDefault(loc => loc.Id == value);
+                }
+            }
+        }
+
         private Locations _selectedLocation;
+        [Ignore]
         public Locations SelectedLocation
         {
             get => _selectedLocation;
             set
             {
-                _selectedLocation = value;
-                OnPropertyChanged(nameof(SelectedLocation));
+                if (_selectedLocation != value)
+                {
+                    _selectedLocation = value;
+                    OnPropertyChanged(nameof(SelectedLocation));
+                    // Update LocationId whenever SelectedLocation is changed
+                    if (value != null && _locationId != value.Id)
+                    {
+                        LocationId = value.Id;
+                    }
+                }
             }
         }
 
-        public int LocationId { get; set; }
         public int DeviceId { get; set; }
-        
-
         public bool IsDeleted { get; set; }
 
-
-
-
-
-
+        public static List<Locations> LocationsList { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
