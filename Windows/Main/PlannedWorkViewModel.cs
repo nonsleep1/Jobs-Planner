@@ -95,9 +95,9 @@ namespace Jobs_Planner.Windows.Main
 
                 LoadData();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message); 
+                MessageBox.Show("Unknown error occured inside PlannedWorkViewModel:"+ ex.Message);
             }
             
 

@@ -30,17 +30,25 @@ namespace Jobs_Planner.Windows.Main
 
         public PlannedWorkWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            var dbPath = ConfigurationManager.AppSettings["DatabasePath"];
-            if (dbPath == null) { throw new ArgumentNullException(); }
-            dbPath = Environment.ExpandEnvironmentVariables(dbPath);
+                var dbPath = ConfigurationManager.AppSettings["DatabasePath"];
+                if (dbPath == null) { throw new ArgumentNullException(); }
+                dbPath = Environment.ExpandEnvironmentVariables(dbPath);
 
-            _databaseService = new DatabaseService(dbPath);
+                _databaseService = new DatabaseService(dbPath);
 
-            _viewModel = new PlannedWorkViewModel();
+                _viewModel = new PlannedWorkViewModel();
 
-            DataContext = _viewModel;
+                DataContext = _viewModel;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unknown error occured inside PlannedWorkWindow.xaml.cs"+ex.Message);
+            }
+            
         }
 
         
