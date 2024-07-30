@@ -79,20 +79,27 @@ namespace Jobs_Planner.Windows.Main
 
         public PlannedWorkViewModel()
         {
+            try
+            {
+                string dbPath = ConfigurationManager.AppSettings["DatabasePath"];
+                if (dbPath == null) { throw new NullReferenceException(nameof(dbPath)); }
+                dbPath = Environment.ExpandEnvironmentVariables(dbPath);
+                // Load data into the collections
+                _databaseService = new DatabaseService(dbPath);
 
-            string dbPath = ConfigurationManager.AppSettings["DatabasePath"];
-            if( dbPath == null ) { throw new NullReferenceException(nameof(dbPath)); }
-            dbPath = Environment.ExpandEnvironmentVariables(dbPath);
-            // Load data into the collections
-            _databaseService = new DatabaseService(dbPath);
-
-            PlannedWork_List = new ObservableCollection<PlannedWork>();
-            Locations_List = new ObservableCollection<Locations>();
-            Devices_List = new ObservableCollection<Devices>();
-            FilteredDevices_List = new ObservableCollection<Devices>();
+                PlannedWork_List = new ObservableCollection<PlannedWork>();
+                Locations_List = new ObservableCollection<Locations>();
+                Devices_List = new ObservableCollection<Devices>();
+                FilteredDevices_List = new ObservableCollection<Devices>();
 
 
-            LoadData();
+                LoadData();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message); 
+            }
+            
 
             
 
@@ -136,28 +143,37 @@ namespace Jobs_Planner.Windows.Main
         {
             //MessageBox.Show("FilterDevices method called");
 
-            if (FilteredDevices_List == null)
+            try
             {
-                
-                FilteredDevices_List = new ObservableCollection<Devices>();
-            }
-
-
-
-            if (SelectedLocation != null)
-            {
-                MessageBox.Show($"Filtering devices for location: {SelectedLocation.Name}");
-                var filteredDevices = Devices_List.Where(d => d.LocationId == SelectedLocation.Id).ToList();
-                FilteredDevices_List.Clear();
-                foreach (var device in filteredDevices)
+                if (FilteredDevices_List == null)
                 {
-                    FilteredDevices_List.Add(device);
+
+                    FilteredDevices_List = new ObservableCollection<Devices>();
+                }
+
+
+
+                if (SelectedLocation != null)
+                {
+                    MessageBox.Show($"Filtering devices for location: {SelectedLocation.Name}");
+                    var filteredDevices = Devices_List.Where(d => d.LocationId == SelectedLocation.Id).ToList();
+                    FilteredDevices_List.Clear();
+                    foreach (var device in filteredDevices)
+                    {
+                        FilteredDevices_List.Add(device);
+                    }
+                }
+                else
+                {
+                    FilteredDevices_List.Clear();
                 }
             }
-            else
+            catch(Exception ex)
             {
-                FilteredDevices_List.Clear();
+                MessageBox.Show(ex.Message);
             }
+
+            
         }
 
 

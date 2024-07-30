@@ -26,10 +26,6 @@ namespace Jobs_Planner.Windows.Main
 
         private readonly DatabaseService _databaseService;
 
-        //public ObservableCollection<Devices> Devices_List { get; set; }
-        //public ObservableCollection<Locations> Locations_List { get; set; }
-        //public ObservableCollection<PlannedWork> PlannedWork_List { get; set; }
-
         private PlannedWorkViewModel _viewModel;
 
         public PlannedWorkWindow()
@@ -43,11 +39,6 @@ namespace Jobs_Planner.Windows.Main
             _databaseService = new DatabaseService(dbPath);
 
             _viewModel = new PlannedWorkViewModel();
-
-
-           // LoadDevices();
-            //LoadLocations();
-            //LoadPlannedWorks();
 
             DataContext = _viewModel;
         }
